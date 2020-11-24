@@ -37,5 +37,29 @@ class EspecieAnimalView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class
+class AnimalView(viewsets.ModelViewSet):
+    """
+    API endpoint permite mostrar los distintos animales
+    """
+    queryset = Animal.objects.all().order_by('id_Animal')
+    serializer_class = Animal
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ExpertoView(viewsets.ModelViewSet):
+    """
+    API endpoint permite mostrar a los expertos
+    """
+    queryset = Experto.objects.all().order_by('id_experto')
+    serializer_class = Experto
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class AvistamientoView(viewsets.ModelViewSet):
+    """
+    API endpoint permite mostrar los avistamientos
+    """
+    queryset = Avistamiento.objects.all().order_by('id_avistamiento')
+    serializer_class = Avistamiento
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
