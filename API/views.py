@@ -1,3 +1,41 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import *
+from .models import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
+
+class GrupoAnimalView(viewsets.ModelViewSet):
+    """
+    API endpoint permite Mostrar los grupos de animales o editarlos
+    """
+    queryset = Grupo_Animal.objects.all().order_by('idGrupo')
+    serializer_class = GrupoAnimalSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class FamiliaAnimalView(viewsets.ModelViewSet):
+    """
+    API endpoint permite mostrar las familias de animales o editarlas
+    """
+    queryset = Familia_Animal.objects.all().order_by('id_familia_animal')
+    serializer_class = FamiliaAnimalSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class EspecieAnimalView(viewsets.ModelViewSet):
+    """
+    API endpoint permite mostrar las especies animales o editarlas
+    """
+    queryset = Especie_Animal.objects.all().order_by('id_especie_animal')
+    serializer_class = EspecieAnimalSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class
+
