@@ -1,13 +1,16 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers
+from rest_framework import serializers, generics
 from .models import *
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    experto = serializers.PrimaryKeyRelatedField(many=True , queryset=Experto.objects.all())
+    avistamiento = serializers.PrimaryKeyRelatedField(many=True, queryset=Avistamiento.objects.all())
+
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'email', 'groups','experto','avistamiento',]
 
 
 class GrupoAnimalSerializer(WritableNestedModelSerializer):
@@ -61,7 +64,7 @@ class AnimalSerializer(WritableNestedModelSerializer):
 
 
 class ExpertoSerializer(WritableNestedModelSerializer):
-    usuario = UserSerializer(allow_null=False)
+    usuario = serializers.ReadOnlyField(source='usuario.username')
 
     class Meta:
         model = Experto
@@ -73,11 +76,11 @@ class ExpertoSerializer(WritableNestedModelSerializer):
             'identificacion_experto',
             'usuario',
         ]
-        read_only_fields = ('id_experto', 'usuario',)
+        read_only_fields = ('id_experto',)
 
 
 class AvistamientoSerializer(WritableNestedModelSerializer):
-    usuario = UserSerializer()
+    usuario = serializers.ReadOnlyField(source='usuario.username')
     animal = AnimalSerializer
 
     class Meta:

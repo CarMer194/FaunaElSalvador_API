@@ -54,6 +54,9 @@ class ExpertoView(viewsets.ModelViewSet):
     serializer_class = ExpertoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(usuario=self.request.user)
+
 
 class AvistamientoView(viewsets.ModelViewSet):
     """
@@ -63,3 +66,15 @@ class AvistamientoView(viewsets.ModelViewSet):
     serializer_class = AvistamientoSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(usuario=self.request.user)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

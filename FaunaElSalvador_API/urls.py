@@ -28,9 +28,12 @@ router.register(r'animal',views.AnimalView)
 router.register(r'expertos',views.ExpertoView)
 router.register(r'avistamientos',views.AvistamientoView)
 
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path(r'users',views.UserList.as_view()),
+    path(r'users/<int:pk>/',views.UserDetail.as_view())
 ]
 
 if settings.DEBUG:

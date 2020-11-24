@@ -63,4 +63,4 @@ class Avistamiento(models.Model):
 
     def __str__(self):
         return self.usuario.__str__() + ' , ' + self.animal.__str__() \
-               + ' ' + self.fecha_hora + '.'
+               + ' ' + self.fecha_hora.__str__() + '.'
