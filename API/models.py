@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.conf import settings
 # Create your models here.
 
 class Grupo_Animal(models.Model):
@@ -37,20 +38,13 @@ class Animal(models.Model):
         return self.nombre_local
 
 
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    correo_electronico = models.CharField(max_length=300)
-    contrasenia = models.CharField(max_length=100)
-    nombre_usuario = models.CharField(max_length=100)
-
-
 class Experto(models.Model):
     id_experto = models.AutoField(primary_key=True)
     nombre_experto = models.CharField(max_length=200)
     apellido_experto = models.CharField(max_length=200)
     institucion_experto = models.CharField(max_length=300)
     identificacion_experto = models.CharField(max_length=500)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre_experto + ' ' + self.apellido_experto + '.'
@@ -63,7 +57,7 @@ class Avistamiento(models.Model):
     fecha_hora = models.DateTimeField(blank=True, null=True)
     fotografia = models.ImageField()
     descripcion = models.TextField(max_length=1000, blank=True, null=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
 
     def __str__(self):
