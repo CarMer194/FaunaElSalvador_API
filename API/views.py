@@ -42,7 +42,7 @@ class AnimalView(viewsets.ModelViewSet):
     API endpoint permite mostrar los distintos animales
     """
     queryset = Animal.objects.all().order_by('id_Animal')
-    serializer_class = Animal
+    serializer_class = AnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -51,7 +51,7 @@ class ExpertoView(viewsets.ModelViewSet):
     API endpoint permite mostrar a los expertos
     """
     queryset = Experto.objects.all().order_by('id_experto')
-    serializer_class = Experto
+    serializer_class = ExpertoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -60,6 +60,6 @@ class AvistamientoView(viewsets.ModelViewSet):
     API endpoint permite mostrar los avistamientos
     """
     queryset = Avistamiento.objects.all().order_by('id_avistamiento')
-    serializer_class = Avistamiento
+    serializer_class = AvistamientoSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
