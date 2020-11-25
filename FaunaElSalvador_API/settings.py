@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+# See https://docs.dangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@6m7rf$tdv6&rf1#^t$3+qy4u=a*mo@khszzt7l9yus^g^#p-m'
@@ -76,19 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'FaunaElSalvador_API.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'd3d29ts2b5ijbb',
-        'USER': 'lzcgfookdgvdqx',
-        'PASSWORD': '78f1fdf48c60b52356b25640021784a33d90dadc8d73abe0942f73b63bbacb06',
-        'HOST': 'ec2-34-235-62-201.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
@@ -159,3 +147,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 #Activate Django-Heroku
 django_heroku.settings(locals())
+
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'd3d29ts2b5ijbb',
+        'USER': 'lzcgfookdgvdqx',
+        'PASSWORD': '78f1fdf48c60b52356b25640021784a33d90dadc8d73abe0942f73b63bbacb06',
+        'HOST': 'ec2-34-235-62-201.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
