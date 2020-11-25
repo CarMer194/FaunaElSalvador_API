@@ -154,8 +154,8 @@ MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
-GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+#GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+#GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
 
 #Activate Django-Heroku
 django_heroku.settings(locals())
