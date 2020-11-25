@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from API import views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 router = routers.DefaultRouter()
 router.register(r'grupoanimal', views.GrupoAnimalView)
@@ -29,12 +30,12 @@ router.register(r'expertos',views.ExpertoView)
 router.register(r'avistamientos',views.AvistamientoView)
 
 
-
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path(r'users',views.UserList.as_view()),
-    path(r'users/<int:pk>/',views.UserDetail.as_view())
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
 if settings.DEBUG:
