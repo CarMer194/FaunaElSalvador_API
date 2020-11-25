@@ -1,1 +1,1 @@
-web: gunicorn FaunaElSalvador.wsgi 
+web: gunicorn FaunaElSalvador_API.wsgi
