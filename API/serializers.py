@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from drf_writable_nested import UniqueFieldsMixin, NestedUpdateMixin, NestedCreateMixin
 from rest_framework import serializers, generics
 from .models import *
 from drf_writable_nested.serializers import WritableNestedModelSerializer
@@ -26,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class GrupoAnimalSerializer(WritableNestedModelSerializer):
+class GrupoAnimalSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = Grupo_Animal
         fields = [
@@ -34,7 +35,7 @@ class GrupoAnimalSerializer(WritableNestedModelSerializer):
         ]
 
 
-class FamiliaAnimalSerializer(WritableNestedModelSerializer):
+class FamiliaAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdateMixin, serializers.ModelSerializer):
     grupo_animal = GrupoAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -43,10 +44,10 @@ class FamiliaAnimalSerializer(WritableNestedModelSerializer):
             'nombre_familia_animal',
             'grupo_animal',
         ]
+        depth = 1
 
 
-
-class EspecieAnimalSerializer(WritableNestedModelSerializer):
+class EspecieAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdateMixin, serializers.ModelSerializer):
     familia_animal = FamiliaAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -55,9 +56,10 @@ class EspecieAnimalSerializer(WritableNestedModelSerializer):
             'nombre_especie_animal',
             'familia_animal',
         ]
+        depth = 1
 
 
-class AnimalSerializer(WritableNestedModelSerializer):
+class AnimalSerializer(NestedCreateMixin, serializers.ModelSerializer):
     especie = EspecieAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -67,6 +69,7 @@ class AnimalSerializer(WritableNestedModelSerializer):
             'estacionalidad',
             'especie',
         ]
+        depth = 1
 
 
 class ExpertoSerializer(WritableNestedModelSerializer):
