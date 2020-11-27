@@ -9,3 +9,4 @@ whitenoise
 drf-writable-nested
 Pillow
 djangorestframework-simplejwt
+django-filter

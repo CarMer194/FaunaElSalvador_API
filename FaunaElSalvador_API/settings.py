@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'API.apps.ApiConfig',
     'django.contrib.gis',
     'rest_framework.authtoken',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +104,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
 }
 
 # Internationalization

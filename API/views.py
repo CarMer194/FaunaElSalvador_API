@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework import permissions
 from rest_framework.permissions import AllowAny
 from .serializers import *
@@ -46,6 +46,8 @@ class AnimalView(viewsets.ModelViewSet):
     queryset = Animal.objects.all().order_by('nombre_local')
     serializer_class = AnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['nombre_local', 'especie__nombre_especie_animal']
 
 
 class ExpertoView(viewsets.ModelViewSet):
@@ -67,6 +69,10 @@ class AvistamientoView(viewsets.ModelViewSet):
     queryset = Avistamiento.objects.all().order_by('id_avistamiento')
     serializer_class = AvistamientoSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['usuario__username', 'animal']
+
+
 
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
