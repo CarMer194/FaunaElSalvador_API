@@ -4,16 +4,14 @@ from django.conf import settings
 
 
 class Grupo_Animal(models.Model):
-    idGrupo = models.AutoField(primary_key=True)
-    nombre_grupo_animal = models.CharField(max_length=500, unique=True)
+    nombre_grupo_animal = models.CharField(max_length=500, primary_key=True)
 
     def __str__(self):
         return self.nombre_grupo_animal
 
 
 class Familia_Animal(models.Model):
-    id_familia_animal = models.AutoField(primary_key=True)
-    nombre_familia_animal= models.CharField(max_length=500, unique=True)
+    nombre_familia_animal= models.CharField(max_length=500, primary_key=True)
     grupo_animal = models.ForeignKey(Grupo_Animal, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -21,17 +19,15 @@ class Familia_Animal(models.Model):
 
 
 class Especie_Animal(models.Model):
-    id_especie_animal = models.AutoField(primary_key=True)
-    nombre_especie_animal = models.CharField(max_length=500, unique=True)
-    familia_animal = models.ForeignKey(Familia_Animal,on_delete=models.CASCADE)
+    nombre_especie_animal = models.CharField(max_length=500, primary_key=True)
+    familia_animal = models.ForeignKey(Familia_Animal, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre_especie_animal
 
 
 class Animal(models.Model):
-    id_Animal = models.AutoField(primary_key=True)
-    nombre_local = models.CharField(max_length=600, unique=True)
+    nombre_local = models.CharField(max_length=600, primary_key=True)
     estacionalidad = models.CharField(max_length=400)
     especie = models.ForeignKey(Especie_Animal, on_delete=models.CASCADE)
 

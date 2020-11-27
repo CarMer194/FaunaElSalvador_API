@@ -30,10 +30,8 @@ class GrupoAnimalSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Grupo_Animal
         fields = [
-            'idGrupo',
             'nombre_grupo_animal',
         ]
-        read_only_fields = ('idGrupo',)
 
 
 class FamiliaAnimalSerializer(WritableNestedModelSerializer):
@@ -42,11 +40,10 @@ class FamiliaAnimalSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Familia_Animal
         fields = [
-            'id_familia_animal',
             'nombre_familia_animal',
             'grupo_animal',
         ]
-        read_only_fields = ('id_familia_animal',)
+
 
 
 class EspecieAnimalSerializer(WritableNestedModelSerializer):
@@ -55,11 +52,9 @@ class EspecieAnimalSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Especie_Animal
         fields = [
-            'id_especie_animal',
             'nombre_especie_animal',
             'familia_animal',
         ]
-        read_only_fields = ('id_especie_animal',)
 
 
 class AnimalSerializer(WritableNestedModelSerializer):
@@ -68,12 +63,10 @@ class AnimalSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Animal
         fields = [
-            'id_Animal',
             'nombre_local',
             'estacionalidad',
             'especie',
         ]
-        read_only_fields = ('id_Animal',)
 
 
 class ExpertoSerializer(WritableNestedModelSerializer):

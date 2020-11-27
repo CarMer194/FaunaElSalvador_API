@@ -16,7 +16,7 @@ class GrupoAnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite Mostrar los grupos de animales o editarlos
     """
-    queryset = Grupo_Animal.objects.all().order_by('idGrupo')
+    queryset = Grupo_Animal.objects.all().order_by('nombre_grupo_animal')
     serializer_class = GrupoAnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -25,7 +25,7 @@ class FamiliaAnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar las familias de animales o editarlas
     """
-    queryset = Familia_Animal.objects.all().order_by('id_familia_animal')
+    queryset = Familia_Animal.objects.all().order_by('nombre_familia_animal')
     serializer_class = FamiliaAnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -34,7 +34,7 @@ class EspecieAnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar las especies animales o editarlas
     """
-    queryset = Especie_Animal.objects.all().order_by('id_especie_animal')
+    queryset = Especie_Animal.objects.all().order_by('nombre_especie_animal')
     serializer_class = EspecieAnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -43,7 +43,7 @@ class AnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar los distintos animales
     """
-    queryset = Animal.objects.all().order_by('id_Animal')
+    queryset = Animal.objects.all().order_by('nombre_local')
     serializer_class = AnimalSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
