@@ -70,7 +70,7 @@ class AvistamientoView(viewsets.ModelViewSet):
     serializer_class = AvistamientoSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['usuario__username', 'animal']
+    search_fields = ['usuario__username', 'animal__nombre_local']
 
 
 
