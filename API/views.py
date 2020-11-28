@@ -1,3 +1,4 @@
+from django.db import connection
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
@@ -11,6 +12,20 @@ from rest_framework.response import Response
 from rest_framework import status
 
 # Create your views here.
+
+
+@api_view(['GET'])
+def obtener_avistamientos_cercanos(request, point, km):
+    lista = []
+    try:
+        avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, km])
+        for avi in avistamientos:
+            lista.append(avi.id_avistamiento)
+    except Avistamiento.DoesNotExist:
+        return Response(status=404)
+    print(lista)
+    return Response(lista, status=200)
+
 
 class GrupoAnimalView(viewsets.ModelViewSet):
     """
