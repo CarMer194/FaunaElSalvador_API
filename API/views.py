@@ -16,7 +16,8 @@ from rest_framework import status
 
 @api_view(['GET'])
 def obtener_avistamientos_cercanos(request, point, km):
-    grados = km/111000
+    grados = int(km)/111000
+    grados = str(grados)
     lista = []
     try:
         avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, grados])
