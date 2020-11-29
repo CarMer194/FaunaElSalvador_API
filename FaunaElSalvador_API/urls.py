@@ -36,7 +36,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('getcercanos/point=<str:point>&m=<str:km>/', views.obtener_avistamientos_cercanos)
+    path('getcercanos/point=<str:point>&m=<str:km>/', views.obtener_avistamientos_cercanos),
+    path('getdistpuntos/point1=<str:point1>&point2=<str:point2>', views.obtener_distancia_objeto),
 ]
 
 if settings.DEBUG:

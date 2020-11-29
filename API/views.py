@@ -1,7 +1,6 @@
 from django.db import connection
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
-from django.contrib.auth import get_user_model
 from rest_framework import viewsets, filters
 from rest_framework import permissions
 from rest_framework.permissions import AllowAny
@@ -9,7 +8,7 @@ from .serializers import *
 from .models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+
 
 # Create your views here.
 
@@ -18,6 +17,7 @@ from rest_framework import status
 def obtener_avistamientos_cercanos(request, point, km):
     grados = int(km)/111000
     grados = str(grados)
+    print(grados)
     lista = []
     try:
         avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, grados])
@@ -27,6 +27,17 @@ def obtener_avistamientos_cercanos(request, point, km):
         return Response(status=404)
     print(lista)
     return Response(lista, status=200)
+
+
+@api_view(['GET'])
+def obtener_distancia_objeto(request, point1, point2):
+    distancia2 = None
+    with connection.cursor() as cursor:
+        cursor.execute(
+            'SELECT ST_Distance(ST_Transform(%s::geometry, 4326),ST_Transform(%s::geometry, 4326));', [point1, point2])
+        distancia = cursor.fetchone()
+        distancia2 = float(distancia[0]) * 111000
+    return Response(distancia2, status=200)
 
 
 class GrupoAnimalView(viewsets.ModelViewSet):
