@@ -19,7 +19,7 @@ def obtener_avistamientos_cercanos(request, point, km):
     grados = km/111000
     lista = []
     try:
-        avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, km])
+        avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, grados])
         for avi in avistamientos:
             lista.append(avi.id_avistamiento)
     except Avistamiento.DoesNotExist:
