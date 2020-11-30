@@ -7,7 +7,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import AllowAny
 from .serializers import *
 from .models import *
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from django.core.files.storage import default_storage
 import logging
@@ -123,21 +123,27 @@ class AvistamientoView(viewsets.ModelViewSet):
     parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
+        logger = logging.getLogger(__name__)
+        logger.info(self.request.data)
+        logger.info(self.request.FILES)
+        print(self.request.data)
+        print(self.request.FILES)
         serializer.save(usuario=self.request.user)
 
     def post(self, request, *args, **kwargs):
-        logger= logging.getLogger(__name__)
-        logger.info(request.data)
-        logger.info(request.FILES)
+
+        print("hola")
+        print(request.FILES)
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
         if avistamiento_serializer.is_valid(raise_exception=True):
-            #print(avistamiento_serializer.data())
+            print(avistamiento_serializer.data())
             Avistamiento.save(avistamiento_serializer.data, request.FILES)
             file = request.FILES
             file_name= default_storage.save(file.name, file)
             return Response(avistamiento_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(avistamiento_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class UserList(generics.ListAPIView):
