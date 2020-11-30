@@ -130,7 +130,7 @@ class AvistamientoView(viewsets.ModelViewSet):
         logger.info(request.data)
         logger.info(request.FILES)
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
-        if avistamiento_serializer.is_valid():
+        if avistamiento_serializer.is_valid(raise_exception=True):
             #print(avistamiento_serializer.data())
             Avistamiento.save(avistamiento_serializer.data, request.FILES)
             file = request.FILES
