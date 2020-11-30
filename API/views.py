@@ -124,13 +124,15 @@ class AvistamientoView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
 
-    def post(self,request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        print(request.FILES)
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
         if avistamiento_serializer.is_valid():
             #print(avistamiento_serializer.data())
             Avistamiento.save(avistamiento_serializer.data, request.FILES)
             file = request.FILES
-            file_name= default_storage.save(file.name,file)
+            file_name= default_storage.save(file.name, file)
             return Response(avistamiento_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(avistamiento_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

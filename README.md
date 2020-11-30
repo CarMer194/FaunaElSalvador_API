@@ -59,6 +59,3 @@ y [DjangoRestFramework](https://www.django-rest-framework.org/)
         }
     Para mas información consulte la documentación: [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html)
     
-    
-            
-    
