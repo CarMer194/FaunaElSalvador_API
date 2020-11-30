@@ -126,6 +126,7 @@ class AvistamientoView(viewsets.ModelViewSet):
     def post(self,request, *args, **kwargs):
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
         if avistamiento_serializer.is_valid():
+            #print(avistamiento_serializer.data())
             avistamiento_serializer.save()
             return Response(avistamiento_serializer.data, status=status.HTTP_201_CREATED)
         else:
