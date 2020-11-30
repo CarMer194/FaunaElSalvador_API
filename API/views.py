@@ -10,6 +10,7 @@ from .models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.core.files.storage import default_storage
+import logging
 
 
 # Create your views here.
@@ -125,8 +126,9 @@ class AvistamientoView(viewsets.ModelViewSet):
         serializer.save(usuario=self.request.user)
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
-        print(request.FILES)
+        logger= logging.getLogger(__name__)
+        logger.info(request.data)
+        logger.info(request.FILES)
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
         if avistamiento_serializer.is_valid():
             #print(avistamiento_serializer.data())
