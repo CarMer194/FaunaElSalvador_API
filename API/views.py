@@ -9,6 +9,7 @@ from .serializers import *
 from .models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.core.files.storage import default_storage
 
 
 # Create your views here.
@@ -127,7 +128,9 @@ class AvistamientoView(viewsets.ModelViewSet):
         avistamiento_serializer = AvistamientoSerializer(data=request.data)
         if avistamiento_serializer.is_valid():
             #print(avistamiento_serializer.data())
-            avistamiento_serializer.save()
+            Avistamiento.save(avistamiento_serializer.data, request.FILES)
+            file = request.FILES
+            file_name= default_storage.save(file.name,file)
             return Response(avistamiento_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(avistamiento_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
