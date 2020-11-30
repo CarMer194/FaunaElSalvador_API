@@ -3,9 +3,14 @@ from drf_writable_nested import UniqueFieldsMixin, NestedUpdateMixin, NestedCrea
 from rest_framework import serializers, generics
 from .models import *
 from drf_writable_nested.serializers import WritableNestedModelSerializer
+"""Clase donde estan implementados los serializadores de los modelos"""
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializador del modelo user con los campos: id, username, email, groups, experto, avistamiento, password
+    donde el campo id es solo lectura y el campo password solo escritura.
+    """
     experto = serializers.PrimaryKeyRelatedField(many=True , queryset=Experto.objects.all())
     avistamiento = serializers.PrimaryKeyRelatedField(many=True, queryset=Avistamiento.objects.all())
 
@@ -28,6 +33,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class GrupoAnimalSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
+    """
+    Serializador del modelo GrupoAnimal con el campo nombre_grupo_animal.
+    """
     class Meta:
         model = Grupo_Animal
         fields = [
@@ -36,6 +44,10 @@ class GrupoAnimalSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
 
 
 class FamiliaAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdateMixin, serializers.ModelSerializer):
+    """
+    Serializador del modelo FamiliaAnimal con los campos nombre_familia_animal y grupo_animal.
+    Referencia a GrupoAnimalSerializer como campo foraneo.
+    """
     grupo_animal = GrupoAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -48,6 +60,10 @@ class FamiliaAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdate
 
 
 class EspecieAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdateMixin, serializers.ModelSerializer):
+    """
+    Serializador del modelo EspecieAnimal con los campos nombre_especie_animal y familia_animal.
+    Referencia a FamiliaAnimalSerializer como campo foraneo.
+    """
     familia_animal = FamiliaAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -60,6 +76,10 @@ class EspecieAnimalSerializer(UniqueFieldsMixin, NestedCreateMixin, NestedUpdate
 
 
 class AnimalSerializer(NestedCreateMixin, serializers.ModelSerializer):
+    """
+        Serializador del modelo Animal con los campos nombre_local, estacionalidad y especie.
+        Referencia a EspecieAnimalSerializer como campo foraneo.
+    """
     especie = EspecieAnimalSerializer(allow_null=False)
 
     class Meta:
@@ -73,6 +93,11 @@ class AnimalSerializer(NestedCreateMixin, serializers.ModelSerializer):
 
 
 class ExpertoSerializer(WritableNestedModelSerializer):
+    """
+    Serializador del modelo Experto con los campos id_experto, nombre_experto, apellido_experto, institucion_experto,
+    identificacion_experto y usuario.
+    Referencia a usuario como solo lectura y campo foraneo.
+    """
     usuario = serializers.ReadOnlyField(source='usuario.username')
 
     class Meta:
@@ -89,6 +114,11 @@ class ExpertoSerializer(WritableNestedModelSerializer):
 
 
 class AvistamientoSerializer(WritableNestedModelSerializer):
+    """
+    Serializador del modelo Avistamiento con los campos id_avistamiento, geom, confirmado, fecha_hora,
+    fotografia, descripcion, usuario y animal.
+    Referencia a usuario como solo lectura y campo foraneo, se hace tambien referencia a animal como campo foraneo.
+    """
     usuario = serializers.ReadOnlyField(source='usuario.username')
     animal = AnimalSerializer
 

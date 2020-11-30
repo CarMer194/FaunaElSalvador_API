@@ -1,9 +1,11 @@
 from django.contrib.gis.db import models
 from django.conf import settings
 # Create your models here.
+"""Clases con los modelos a implementar en la base de datos"""
 
 
 class Grupo_Animal(models.Model):
+    """Modelo que representa al grupo biologico del animal"""
     nombre_grupo_animal = models.CharField(max_length=500, primary_key=True)
 
     def __str__(self):
@@ -11,6 +13,7 @@ class Grupo_Animal(models.Model):
 
 
 class Familia_Animal(models.Model):
+    """Modelo que representa a la familia biologica del animal"""
     nombre_familia_animal= models.CharField(max_length=500, primary_key=True)
     grupo_animal = models.ForeignKey(Grupo_Animal, on_delete=models.CASCADE)
 
@@ -19,6 +22,7 @@ class Familia_Animal(models.Model):
 
 
 class Especie_Animal(models.Model):
+    """Modelo que representa a la especie bologica del animal"""
     nombre_especie_animal = models.CharField(max_length=500, primary_key=True)
     familia_animal = models.ForeignKey(Familia_Animal, on_delete=models.CASCADE)
 
@@ -27,6 +31,7 @@ class Especie_Animal(models.Model):
 
 
 class Animal(models.Model):
+    """Modelo que representa al animal, con su nombre local de El Salvador"""
     nombre_local = models.CharField(max_length=600, primary_key=True)
     estacionalidad = models.CharField(max_length=400)
     especie = models.ForeignKey(Especie_Animal, on_delete=models.CASCADE)
@@ -36,6 +41,8 @@ class Animal(models.Model):
 
 
 class Experto(models.Model):
+    """Modelo que representa los datos de un usuario experto en biologia que le da el
+    acceso a verificar avistamientos"""
     id_experto = models.AutoField(primary_key=True)
     nombre_experto = models.CharField(max_length=200)
     apellido_experto = models.CharField(max_length=200)
@@ -48,6 +55,7 @@ class Experto(models.Model):
 
 
 class Avistamiento(models.Model):
+    """Modelo que representa un avistamiento de un animal, el campo geom es un modelo espacial vector punto"""
     id_avistamiento = models.AutoField(primary_key=True)
     geom = models.GeometryField()
     confirmado = models.BooleanField(default=False)
