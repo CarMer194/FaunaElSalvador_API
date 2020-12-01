@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if showmessage %}
+    <h2 style="color: green" class="text-center">{{ mensaje }}</h2>
+{% endif %}
+<form method="post" class="form-group" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="fieldBox">
+        {{ form.usuario.errors }}
+        <label>Usuario</label><input type="text" value="{{ user.id }}" id="{{ form.usuario.id_for_label }}" name="{{ form.usuario.name }}" readonly>
+    </div><br>
+    <div class="fieldBox">
+        {{ form.geom.errors }}
+        <label>Ubicación</label><input type="text" value="{{ point }}" id="{{ form.geom.id_for_label }}" name="{{ form.geom.name }}" readonly>
+    </div><br>
+    <div class="fieldBox">
+        {{ form.animal.errors }}
+        {{ form.animal.label_tag }}
+        {{ form.animal }}
+    </div><br>
+    <div class="fieldBox">
+        {{ form.fotografia.errors }}
+        {{ form.fotografia.label_tag }}
+        {{ form.fotografia }}
+    </div><br>
+    <div class="fieldBox">
+        {{ form.descripcion.errors }}
+        {{ form.descripcion.label_tag }}
+        {{ form.descripcion }}
+    </div><br>
+    <input type="submit" value="Guardar">
+</form>
+</body>
+</html>

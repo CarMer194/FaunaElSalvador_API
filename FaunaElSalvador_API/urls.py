@@ -20,6 +20,7 @@ from django.urls import path, include
 from rest_framework import routers
 from API import views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from faunaform import views as formsview
 
 router = routers.DefaultRouter()
 router.register(r'grupoanimal', views.GrupoAnimalView)
@@ -38,6 +39,8 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('getcercanos/point=<str:point>&m=<str:km>/', views.obtener_avistamientos_cercanos),
     path('getdistpuntos/point1=<str:point1>&point2=<str:point2>', views.obtener_distancia_objeto),
+    path('avistamientoform/point=<str:point>&user=<str:user>', formsview.formulario),
+    path('resultado/',formsview.resultado, name='resultado')
 ]
 
 if settings.DEBUG:
