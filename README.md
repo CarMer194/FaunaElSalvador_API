@@ -48,7 +48,10 @@ para obtener información sobre como habilitarla.
 
 API
 -
-Sobre información de los API Endpoint consultar el documento que se encuentra en el repositorio.
+Actualmente la API se encuentra montada en la siguiente direccion: [FaunaSV](faunaelsalvador.herokuapp.com/)
+Es libre de iniciar sesion como invitado para interactuar con la API en el siguiente enlace: [Enlace](https://faunaelsalvador.herokuapp.com/api-auth/login/)
+
+Sobre información de los API Endpoint consultar en directorio /API/readme.md.
 
 Reconocimiento a liberias implementadas
 -

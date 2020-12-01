@@ -27,7 +27,9 @@ def obtener_avistamientos_cercanos(request, point, km):
     print(grados)
     lista = []
     try:
-        avistamientos = Avistamiento.objects.raw('SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)', [point, grados])
+        avistamientos = Avistamiento.objects.raw(
+            'SELECT id_avistamiento FROM "API_avistamiento" as av WHERE st_contains(st_buffer(%s,%s),av.geom)',
+            [point, grados])
         for avi in avistamientos:
             lista.append(avi.id_avistamiento)
     except Avistamiento.DoesNotExist:
@@ -53,8 +55,8 @@ def obtener_distancia_objeto(request, point1, point2):
 
 class GrupoAnimalView(viewsets.ModelViewSet):
     """
-    API endpoint permite Mostrar los grupos de animales o editarlos,
-    la opción de edicion solo se encuentra disponible con autenticación
+    API endpoint permite Mostrar los grupos de animales, crear o editarlos,
+    la opción de creación y edicion solo se encuentra disponible con auténticacion.
     """
     queryset = Grupo_Animal.objects.all().order_by('nombre_grupo_animal')
     serializer_class = GrupoAnimalSerializer
@@ -64,7 +66,7 @@ class GrupoAnimalView(viewsets.ModelViewSet):
 class FamiliaAnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar las familias de animales o editarlas
-    la opción de edicion solo se encuentra disponible con autenticación
+    la opción de edición solo se encuentra disponible con auténticacion
     """
     queryset = Familia_Animal.objects.all().order_by('nombre_familia_animal')
     serializer_class = FamiliaAnimalSerializer
@@ -74,7 +76,7 @@ class FamiliaAnimalView(viewsets.ModelViewSet):
 class EspecieAnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar las especies animales o editarlas
-    la opción de edicion solo se encuentra disponible con autenticación
+    la opción de edición solo se encuentra disponible con auténticacion
     """
     queryset = Especie_Animal.objects.all().order_by('nombre_especie_animal')
     serializer_class = EspecieAnimalSerializer
@@ -84,9 +86,9 @@ class EspecieAnimalView(viewsets.ModelViewSet):
 class AnimalView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar los distintos animales
-    la opción de edicion solo se encuentra disponible con autenticación
+    la opción de edición solo se encuentra disponible con auténticacion
     Se ha implementado el filtro search con los campos de nombre local y especie de animal
-    se puede acceder con /search=
+    se puede acceder con /?search=
     """
     queryset = Animal.objects.all().order_by('nombre_local')
     serializer_class = AnimalSerializer
@@ -98,7 +100,7 @@ class AnimalView(viewsets.ModelViewSet):
 class ExpertoView(viewsets.ModelViewSet):
     """
     API endpoint permite mostrar a los expertos
-    se requiere de autenticacion para poder verlos
+    se requiere de auténticacion para poder verlos
     """
     queryset = Experto.objects.all().order_by('id_experto')
     serializer_class = ExpertoSerializer
@@ -110,10 +112,10 @@ class ExpertoView(viewsets.ModelViewSet):
 
 class AvistamientoView(viewsets.ModelViewSet):
     """
-    API endpoint permite mostrar los avistamientos
-    la opción de edicion solo se encuentra disponible con autenticación.
+    API endpoint permite mostrar, editar y crear los avistamientos
+    la opción de edición solo se encuentra disponible con auténticacion.
     Se ha implementado el filtro search con los campos de username y nombre de animal
-    se puede acceder con /search=
+    se puede acceder con /?search==
     """
     queryset = Avistamiento.objects.all().order_by('id_avistamiento')
     serializer_class = AvistamientoSerializer
