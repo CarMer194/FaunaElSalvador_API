@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.dangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@6m7rf$tdv6&rf1#^t$3+qy4u=a*mo@khszzt7l9yus^g^#p-m'
+SECRET_KEY = '' #Crear una secret Key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -156,10 +156,10 @@ django_heroku.settings(locals())
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'd3d29ts2b5ijbb',
-        'USER': 'lzcgfookdgvdqx',
-        'PASSWORD': '78f1fdf48c60b52356b25640021784a33d90dadc8d73abe0942f73b63bbacb06',
-        'HOST': 'ec2-34-235-62-201.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': '', #Nombre de base de datos
+        'USER': '', #Usuario de base de datos
+        'PASSWORD': '',#Contraseña de base de datos
+        'HOST': '', #Host de base de datos
+        'PORT': '5432', #Puerto
     }
 }

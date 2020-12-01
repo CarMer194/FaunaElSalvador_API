@@ -25,7 +25,8 @@ Pasos para su instalacion
     pip3 install requirements.txt
 
 Dirigirse a FaunaEsSalvador_API/setting.py, en la parte de DATABASES configurar la base de datos para su conexión,
-es requisito un base de datos PostgreSQL con extensión PostGIS.
+es requisito un base de datos PostgreSQL con extensión PostGIS. Crear una secret key en el apartado SECRET_KEY en 
+settigs.py.
 
 Luego crear las migraciones:
 
