@@ -10,9 +10,7 @@ Requisitos
     -Python(3.5, 3.6, 3.7, 3.8, 3.9)
     -Django (3.0,3.1)
     -djangorestframework
-    -dj-database-url
     -psycopg2
-    -python-decouple
     -whitenoise
     -drf-writable-nested
     -Pillow
@@ -49,22 +47,23 @@ para obtener información sobre como habilitarla.
 
 API
 -
-FaunaSV API se ha construido basandonos en el framework [Django](https://www.djangoproject.com/) 
-y [DjangoRestFramework](https://www.django-rest-framework.org/)
+Sobre información de los API Endpoint consultar el documento que se encuentra en el repositorio.
 
--   Autenticacion de usuarios a traves de JSON, se realiza con la implementación de la libreria [SimpleJWT](https://github.com/SimpleJWT/django-rest-framework-simplejwt),
-    ejemplo:
+Reconocimiento a liberias implementadas
+-
+*   DRF Writable Nested:
+    Copyright (c) 2014-2020, beda.software All rights reserved.
     
-        curl \
-        -X POST \
-        -H "Content-Type: application/json" \
-        -d '{"username": "torogoz", "password": "volador"}' \
-        http://localhost:8000/api/token/
-    Se recibirá dos tokens para autenticación y para actualización:
+*   Django Rest Framework:
+    Copyright © 2011-present, Encode OSS Ltd. All rights reserved.
     
-        {
-        "access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3BrIjoxLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiY29sZF9zdHVmZiI6IuKYgyIsImV4cCI6MTIzNDU2LCJqdGkiOiJmZDJmOWQ1ZTFhN2M0MmU4OTQ5MzVlMzYyYmNhOGJjYSJ9.NHlztMGER7UADHZJlxNG0WSi22a2KaYSfd1S-AuT7lU",
-        "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3BrIjoxLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImNvbGRfc3R1ZmYiOiLimIMiLCJleHAiOjIzNDU2NywianRpIjoiZGUxMmY0ZTY3MDY4NDI3ODg5ZjE1YWMyNzcwZGEwNTEifQ.aEoAYkSJjoWH1boshQAaTkf8G3yn0kapko6HFRt7Rh4"
-        }
-    Para mas información consulte la documentación: [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html)
-    
+*   Django: Copyright (c) Django Software Foundation and individual contributors.
+All rights reserved.
+
+*   whitenoise: The MIT License (MIT) Copyright (c) 2013 David Evans
+
+*   django-filter: Copyright (c) Alex Gaynor and individual contributors.
+All rights reserved.
+
+*   gunicorn: 2009-2018 (c) Benoît Chesneau <benoitc@e-engura.org>
+2009-2015 (c) Paul J. Davis <paul.joseph.davis@gmail.com>
