@@ -6,7 +6,7 @@ from API.models import Avistamiento
 
 # Create your views here.
 
-def formulario(request, point, user):
+def formulario(request, point, user,date):
     mensaje = "¡Guardado con exito!"
     user_instance = User.objects.get(username=user)
     showmessage = False
@@ -17,7 +17,13 @@ def formulario(request, point, user):
             showmessage = True
     else:
         form = AvistamientoForm()
-    context = {'form': form, 'mensaje': mensaje, 'point':point, 'user':user_instance, 'showmessage':showmessage}
+    context = {'form': form,
+               'mensaje': mensaje,
+               'point': point,
+               'user': user_instance,
+               'showmessage': showmessage,
+               'date': date,
+               }
     return render(request, 'Formulario.html', context)
 
 

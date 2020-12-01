@@ -1,7 +1,9 @@
 FaunaSV API
 -
 FaunaSV es un proyecto basado en GeoDjango y PostGIS para el registro
-de la fauna de El Salvador con enfoque geoespacial.
+de la fauna de El Salvador con enfoque geoespacial. El proyecto contiene una base de datos de animales que residen
+en El Salvador, se adjunta un archivo en PDF el recurso suministrado por el Ministerio de Medioambiente y Recursos 
+Naturales, ademas de un backup en CSV contiendo los animales que se encuentran en la base de datos actualmente.
 
 Requisitos
 -
@@ -37,7 +39,14 @@ Cree un superusuario para el panel de administración:
 Configurar la cuenta de usuario y luego correr el servidor:
 
     python3 manage.py runserver
-    
+
+Consideraciones
+-
+*   Actualmente el proyecto solo cuenta en su base de datos reptiles, se invita a continuar el registro de animales proveido
+por el ministerio, realizando la extracción de datos del PDF.
+*   El registro de usuarios no se encuentra habilitado, revisar la documentación de [Django](https://www.djangoproject.com/)
+para obtener información sobre como habilitarla.
+
 API
 -
 FaunaSV API se ha construido basandonos en el framework [Django](https://www.djangoproject.com/) 

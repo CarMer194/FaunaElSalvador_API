@@ -11,7 +11,8 @@ class AvistamientoForm(ModelForm):
             'fotografia',
             'descripcion',
             'animal',
-            'usuario'
+            'usuario',
+            'fecha_hora',
         ]
 
 

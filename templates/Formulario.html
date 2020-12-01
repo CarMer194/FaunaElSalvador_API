@@ -13,6 +13,10 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="fieldBox">
+        {{ form.fecha_hora.errors }}
+        <label>Fecha y hora</label><input type="text" value="{{ date }}" name="{{ form.fecha_hora.name }}" id="{{ form.fecha_hora.id_for_label }}" readonly>
+    </div><br>
+    <div class="fieldBox">
         {{ form.usuario.errors }}
         <label>Usuario</label><input type="text" value="{{ user.id }}" id="{{ form.usuario.id_for_label }}" name="{{ form.usuario.name }}" readonly>
     </div><br>

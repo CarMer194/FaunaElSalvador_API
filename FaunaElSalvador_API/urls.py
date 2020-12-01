@@ -39,7 +39,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('getcercanos/point=<str:point>&m=<str:km>/', views.obtener_avistamientos_cercanos),
     path('getdistpuntos/point1=<str:point1>&point2=<str:point2>', views.obtener_distancia_objeto),
-    path('avistamientoform/point=<str:point>&user=<str:user>', formsview.formulario),
+    path('avistamientoform/point=<str:point>&user=<str:user>&date=<str:date>', formsview.formulario),
     path('resultado/',formsview.resultado, name='resultado')
 ]
 
