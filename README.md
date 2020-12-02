@@ -45,6 +45,9 @@ Consideraciones
 por el ministerio, realizando la extracción de datos del PDF.
 *   El registro de usuarios no se encuentra habilitado, revisar la documentación de [Django](https://www.djangoproject.com/)
 para obtener información sobre como habilitarla.
+*   Actualmente el proyecto se encuentra en la plataforma Heroku, dicha plataforma funciona con dynos, que luego de un
+tiempo de inactividad se le quita el recurso al proyecto, por tanto las fotografias se pierden cuando al proyecto se le
+retira el dyno.
 
 API
 -
